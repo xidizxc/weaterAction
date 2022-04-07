@@ -67,12 +67,12 @@ def get_iciba_everyday():
     bee = eed.json()  #返回的数据
     english = bee['content']
     zh_CN = bee['note']
-    str = '宝贝早安~\n'
+    str = '再说一次早安哦~\n'
     return str
 
 def ServerPush(info): #Server酱推送
     api = "https://sc.ftqq.com/{}.send".format(SCKEY)
-    title = u"天气推送"
+    title = u"美好的一天从睁开眼睛开始~"
     content = info.replace('\n', '\n\n')
     data = {
         "text": title,
@@ -105,10 +105,10 @@ def main():
             ganmao = d["data"]["ganmao"] #感冒指数
             tips = d["data"]["forecast"][0]["notice"] #温馨提示
             # 天气提示内容
-            tdwt = "今天天气怎么样呢？\n宝贝所在城市： " + parent + city + \
-                   "\n日期： " + date + "\n星期: " + week + "\n天气: " + weather_type + "\n温度: " + wendu_high + " / "+ wendu_low + "\n湿度: " + \
+            tdwt = "宝贝早安！\n今天天气怎么样呢？\n宝贝所在城市： " + parent + city + \
+                   "\n日期： " + date + "\n星期: " + week + "\n今天日期: " + weather_type + "\n温度: " + wendu_high + " / "+ wendu_low + "\n湿度: " + \
                     shidu + "\nPM25: " + pm25 + "\nPM10: " + pm10 + "\n空气质量: " + quality + \
-                   "\n风力风向: " + fx + fl + "\n感冒指数: "  + ganmao + "\n温馨提示： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
+                   "\n风力风向: " + fx + fl + "\n感冒指数: "  + ganmao + "\n爱你哦： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
             # print(tdwt)
             # requests.post(cpurl,tdwt.encode('utf-8'))         #把天气数据转换成UTF-8格式，不然要报错。
             ServerPush(tdwt)
