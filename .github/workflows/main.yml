@@ -1,4 +1,4 @@
-name: push loveword to QQ
+name: push loveword to weixin
 # 这个部分用来指定能够触发工作流执行的事件
 on:
   # 当对分支main进行push操作的时候，这个工作流就被触发了
