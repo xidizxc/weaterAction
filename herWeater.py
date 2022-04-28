@@ -106,7 +106,7 @@ def main():
             tips = d["data"]["forecast"][0]["notice"] #温馨提示
             # 天气提示内容
             tdwt = "宝贝早安！\n今天天气怎么样呢？\n宝贝所在城市： " + parent + city + \
-                   "\n日期： " + date + "\n星期: " + week + "\n今天日期: " + weather_type + "\n温度: " + wendu_high + " / "+ wendu_low + "\n湿度: " + \
+                   "\n日期： " + date + "\n星期: " + week + "\n今天天气: " + weather_type + "\n温度: " + wendu_high + " / "+ wendu_low + "\n湿度: " + \
                     shidu + "\nPM25: " + pm25 + "\nPM10: " + pm10 + "\n空气质量: " + quality + \
                    "\n风力风向: " + fx + fl + "\n感冒指数: "  + ganmao + "\n爱你哦： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
             # print(tdwt)
