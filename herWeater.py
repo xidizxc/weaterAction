@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# @Author  : ZXC
+# @Time    : 2022/4/28 20:02
+# @Function:
 #!/usr/bin/python3
 #coding=utf-8
 
@@ -10,8 +14,6 @@ import os
 import time
 from lxml import etree
 SCKEY=os.environ.get('SCKEY') ##Server酱推送KEY
-#SKey=os.environ.get('SKEY') #CoolPush酷推KEY
-ips = []  # 装载有效 IP
 def getIP():
     for i in range(1, 5):
         headers = {
@@ -105,11 +107,31 @@ def main():
             ganmao = d["data"]["ganmao"] #感冒指数
             tips = d["data"]["forecast"][0]["notice"] #温馨提示
             # 天气提示内容
-            tdwt = "宝贝早安！\n今天天气怎么样呢？\n宝贝所在城市： " + parent + city + \
+
+            wendu1 = wendu_high
+            if wendu1 <= "高温 -15℃":
+                chuanyizhishu = '天气寒冷，冬季着装：棉衣、羽绒服、冬大衣、皮夹克加羊毛衫、厚呢外套、呢帽、手套等；年老体弱者尽量少外出'
+            if "高温 -15℃" < wendu1 <= "高温 5℃":
+                chuanyizhishu = '天气冷，冬季着装：棉衣、羽绒衣、冬大衣、皮夹克、毛衣再外罩大衣等；年老体弱者尤其要注意保暖防冻'
+            if "高温 5℃" < wendu1 <= "高温 15℃":
+                chuanyizhishu = '天气凉，适宜着一到两件羊毛衫、大衣、毛套装、皮夹克等春秋着装；年老体弱者宜着大衣、夹衣或风衣加羊毛衫等厚型春秋着装'
+            if "高温 15℃" < wendu1 <= "高温 20℃":
+                chuanyizhishu = '天气温凉，适宜着夹衣、马甲衬衫、长裤、夹克衫、西服套装加薄羊毛衫等春秋服装。年老体弱者：夹衣或风衣加羊毛衫'
+            if "高温 20℃" < wendu1 <= "高温 25℃":
+                chuanyizhishu = '天气暖和，适宜着单层棉麻面料的短套装、T恤衫、薄牛仔衫裤、休闲服、职业套装等春秋过渡装。年老体弱者请适当增减衣服'
+            if "高温 25℃" < wendu1 <= "高温 28℃":
+                chuanyizhishu = '天气偏热，适宜着短衫、短裙、短套装、T恤等夏季服装。年老体弱者：单层薄衫裤、薄型棉衫'
+            if "高温 28℃" < wendu1 <= "高温 33℃":
+                chuanyizhishu = '天气炎热，适宜着短衫、短裙、短裤、薄型T恤衫、敞领短袖棉衫等夏季服装'
+            if "高温 33℃" < wendu1:
+                chuanyizhishu = '天气极热，适宜着丝麻、轻棉织物制作的短衣、短裙、薄短裙、短裤等夏季服装。午后尽量减少户外活动，高温条件下作业和露天作业人员采取必要防护措施'
+            tdwt = "宝贝早安！\n今天天气怎么样呢？\n宝贝在哪： " + parent + city + \
                    "\n日期： " + date + "\n星期: " + week + "\n今天天气: " + weather_type + "\n温度: " + wendu_high + " / "+ wendu_low + "\n湿度: " + \
                     shidu + "\nPM25: " + pm25 + "\nPM10: " + pm10 + "\n空气质量: " + quality + \
-                   "\n风力风向: " + fx + fl + "\n感冒指数: "  + ganmao + "\n爱你哦： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
+                   "\n风力风向: " + fx + fl + "\n感冒指数: " + ganmao + "\n穿衣建议: " + chuanyizhishu  + "\n爱你哦： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
             # print(tdwt)
+
+
             # requests.post(cpurl,tdwt.encode('utf-8'))         #把天气数据转换成UTF-8格式，不然要报错。
             ServerPush(tdwt)
             # CoolPush(tdwt)
@@ -121,4 +143,3 @@ def main():
 if __name__ == '__main__':
     main()
     print("hello")
-
